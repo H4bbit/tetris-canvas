@@ -25,7 +25,7 @@ export class InputHandler {
     };
 
     window.addEventListener("keydown", (e) =>
-      handleKeyEvent(e, { state: INPUT_STATE_INITIAL, timer: 0 })
+      handleKeyEvent(e, { state: INPUT_STATE_INITIAL, timer: 0 }),
     );
     window.addEventListener("keyup", (e) => handleKeyEvent(e, undefined));
   }
@@ -59,7 +59,7 @@ export class InputHandler {
         }
         return shouldRepeat;
     }
-    
+
     return false;
   }
 
@@ -68,4 +68,3 @@ export class InputHandler {
     return this.inputs[inputType];
   }
 }
-
