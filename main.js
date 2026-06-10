@@ -1,106 +1,13 @@
-const SHAPES = [
-  // I
-  [
-    [0, 0, 0, 0],
-    [1, 1, 1, 1],
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
-  ],
-  // J
-  [
-    [1, 0, 0],
-    [1, 1, 1],
-    [0, 0, 0],
-  ],
-  // L
-  [
-    [0, 0, 1],
-    [1, 1, 1],
-    [0, 0, 0],
-  ],
-  // O
-  [
-    [1, 1],
-    [1, 1],
-  ],
-  // S
-  [
-    [0, 1, 1],
-    [1, 1, 0],
-    [0, 0, 0],
-  ],
-  // T
-  [
-    [1, 1, 1],
-    [0, 1, 0],
-    [0, 0, 0],
-  ],
-  // Z
-  [
-    [1, 1, 0],
-    [0, 1, 1],
-    [0, 0, 0],
-  ],
-];
-
-const SHAPE_COLORS = [
-  '#00BCD4',
-  '#485FE5',
-  '#FF9800',
-  '#FFEB3B',
-  '#4CAF50',
-  '#A629BC',
-  '#F44336',
-];
-
-const COLOR_SIDEBAR_BORDER = '#DDD';
-const COLOR_EMPTY_BLOCK = '#343434';
-const COLOR_GAME_OVER_OVERLAY = '#000000bb';
-const COLOR_FONT = '#FFF';
-
-const BLOCK_SIZE = 46;
-const BLOCK_BACKGROUND = '#292929';
-
-const GRAVITY_SPEED = 1;
-const GRAVITY_ACCELERATION = 0.00001;
-const GRAVITY_THRESHOLD = 1000; // After reaching this progress, the piece moves down
-
-const GRID_COLS = 10;
-const GRID_ROWS = 20;
-
-const SIDEBAR_BORDER = 20;
-const SIDEBAR_WIDTH_BLOCKS = 6;
-
-const INPUT_REPEAT_THRESHOLD = 400;
-const INPUT_REPEAT_INTERVAL = 5;
-
-// Maximum delta time between frames
-const MAX_DT = 100;
-
-const KEY_TO_INPUT_TYPE = {
-  ArrowLeft: 'moveLeft',
-  ArrowRight: 'moveRight',
-  ArrowDown: 'moveDown',
-  ArrowUp: 'rotate',
-  ' ': 'hardDrop',
-  r: 'restart',
-};
-
-const GRID_WIDTH = GRID_COLS * BLOCK_SIZE;
-const GRID_HEIGHT = GRID_ROWS * BLOCK_SIZE;
-
-const SIDEBAR_WIDTH = SIDEBAR_WIDTH_BLOCKS * BLOCK_SIZE;
-const SIDEBAR_CONTENT_X = GRID_WIDTH + SIDEBAR_BORDER + BLOCK_SIZE;
-const SIDEBAR_CONTENT_Y = BLOCK_SIZE;
-
-const CANVAS_WIDTH = GRID_WIDTH + SIDEBAR_BORDER + SIDEBAR_WIDTH;
-const CANVAS_HEIGHT = GRID_HEIGHT;
-
-const INPUT_STATE_INITIAL = 0;
-const INPUT_STATE_CHARGING = 1;
-const INPUT_STATE_REPEATING = 2;
-
-const BLOCK_EMPTY = -1;
+import {
+  SHAPES, SHAPE_COLORS, COLOR_SIDEBAR_BORDER, COLOR_EMPTY_BLOCK,
+  COLOR_GAME_OVER_OVERLAY, COLOR_FONT, BLOCK_SIZE, BLOCK_BACKGROUND,
+  GRAVITY_SPEED, GRAVITY_ACCELERATION, GRAVITY_THRESHOLD, GRID_COLS,
+  GRID_ROWS, SIDEBAR_BORDER, SIDEBAR_WIDTH_BLOCKS, INPUT_REPEAT_THRESHOLD,
+  INPUT_REPEAT_INTERVAL, MAX_DT, KEY_TO_INPUT_TYPE, GRID_WIDTH,
+  GRID_HEIGHT, SIDEBAR_WIDTH, SIDEBAR_CONTENT_X, SIDEBAR_CONTENT_Y,
+  CANVAS_WIDTH, CANVAS_HEIGHT, INPUT_STATE_INITIAL, INPUT_STATE_CHARGING,
+  INPUT_STATE_REPEATING, BLOCK_EMPTY
+} from './constants.js';
 
 // Get random value from {0, 1, ..., n - 1}
 function getRandomIndex(n) {
