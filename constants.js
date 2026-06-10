@@ -46,22 +46,22 @@ export const SHAPES = [
 ];
 
 export const SHAPE_COLORS = [
-  '#00BCD4',
-  '#485FE5',
-  '#FF9800',
-  '#FFEB3B',
-  '#4CAF50',
-  '#A629BC',
-  '#F44336',
+  "#00BCD4",
+  "#485FE5",
+  "#FF9800",
+  "#FFEB3B",
+  "#4CAF50",
+  "#A629BC",
+  "#F44336",
 ];
 
-export const COLOR_SIDEBAR_BORDER = '#DDD';
-export const COLOR_EMPTY_BLOCK = '#343434';
-export const COLOR_GAME_OVER_OVERLAY = '#000000bb';
-export const COLOR_FONT = '#FFF';
+export const COLOR_SIDEBAR_BORDER = "#DDD";
+export const COLOR_EMPTY_BLOCK = "#343434";
+export const COLOR_GAME_OVER_OVERLAY = "#000000bb";
+export const COLOR_FONT = "#FFF";
 
 export const BLOCK_SIZE = 46;
-export const BLOCK_BACKGROUND = '#292929';
+export const BLOCK_BACKGROUND = "#292929";
 
 export const GRAVITY_SPEED = 1;
 export const GRAVITY_ACCELERATION = 0.00001;
@@ -79,12 +79,12 @@ export const INPUT_REPEAT_INTERVAL = 5;
 export const MAX_DT = 100;
 
 export const KEY_TO_INPUT_TYPE = {
-  ArrowLeft: 'moveLeft',
-  ArrowRight: 'moveRight',
-  ArrowDown: 'moveDown',
-  ArrowUp: 'rotate',
-  ' ': 'hardDrop',
-  r: 'restart',
+  ArrowLeft: "moveLeft",
+  ArrowRight: "moveRight",
+  ArrowDown: "moveDown",
+  ArrowUp: "rotate",
+  " ": "hardDrop",
+  r: "restart",
 };
 
 // Computed constants
@@ -103,4 +103,3 @@ export const INPUT_STATE_CHARGING = 1;
 export const INPUT_STATE_REPEATING = 2;
 
 export const BLOCK_EMPTY = -1;
-
