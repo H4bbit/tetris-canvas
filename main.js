@@ -1,4 +1,5 @@
 import { Renderer } from "./renderer.js";
+import { InputHandler } from "./input_handler.js";
 
 import {
   SHAPES,
@@ -8,16 +9,7 @@ import {
   GRAVITY_THRESHOLD,
   GRID_COLS,
   GRID_ROWS,
-  SIDEBAR_BORDER,
-  SIDEBAR_WIDTH_BLOCKS,
-  INPUT_REPEAT_THRESHOLD,
-  INPUT_REPEAT_INTERVAL,
   MAX_DT,
-  KEY_TO_INPUT_TYPE,
-  SIDEBAR_WIDTH,
-  INPUT_STATE_INITIAL,
-  INPUT_STATE_CHARGING,
-  INPUT_STATE_REPEATING,
 } from "./constants.js";
 
 // Get random value from {0, 1, ..., n - 1}
