@@ -1,13 +1,24 @@
+import { Renderer } from "./renderer.js";
+
 import {
-  SHAPES, SHAPE_COLORS, COLOR_SIDEBAR_BORDER, COLOR_EMPTY_BLOCK,
-  COLOR_GAME_OVER_OVERLAY, COLOR_FONT, BLOCK_SIZE, BLOCK_BACKGROUND,
-  GRAVITY_SPEED, GRAVITY_ACCELERATION, GRAVITY_THRESHOLD, GRID_COLS,
-  GRID_ROWS, SIDEBAR_BORDER, SIDEBAR_WIDTH_BLOCKS, INPUT_REPEAT_THRESHOLD,
-  INPUT_REPEAT_INTERVAL, MAX_DT, KEY_TO_INPUT_TYPE, GRID_WIDTH,
-  GRID_HEIGHT, SIDEBAR_WIDTH, SIDEBAR_CONTENT_X, SIDEBAR_CONTENT_Y,
-  CANVAS_WIDTH, CANVAS_HEIGHT, INPUT_STATE_INITIAL, INPUT_STATE_CHARGING,
-  INPUT_STATE_REPEATING, BLOCK_EMPTY
-} from './constants.js';
+  SHAPES,
+  BLOCK_EMPTY,
+  GRAVITY_SPEED,
+  GRAVITY_ACCELERATION,
+  GRAVITY_THRESHOLD,
+  GRID_COLS,
+  GRID_ROWS,
+  SIDEBAR_BORDER,
+  SIDEBAR_WIDTH_BLOCKS,
+  INPUT_REPEAT_THRESHOLD,
+  INPUT_REPEAT_INTERVAL,
+  MAX_DT,
+  KEY_TO_INPUT_TYPE,
+  SIDEBAR_WIDTH,
+  INPUT_STATE_INITIAL,
+  INPUT_STATE_CHARGING,
+  INPUT_STATE_REPEATING,
+} from "./constants.js";
 
 // Get random value from {0, 1, ..., n - 1}
 function getRandomIndex(n) {
@@ -20,7 +31,7 @@ function getRandomShapeId() {
 
 function makeEmptyGrid() {
   return Array.from({ length: GRID_ROWS }, () =>
-    Array(GRID_COLS).fill(BLOCK_EMPTY)
+    Array(GRID_COLS).fill(BLOCK_EMPTY),
   );
 }
 
@@ -156,8 +167,8 @@ function rotate(shape) {
   return Array.from({ length: shape[0].length }, (_, i) =>
     Array.from(
       { length: shape.length },
-      (_, j) => shape[shape.length - 1 - j][i]
-    )
+      (_, j) => shape[shape.length - 1 - j][i],
+    ),
   );
 }
 
@@ -220,23 +231,23 @@ function updateCurrentPiece(state, inputs, dt) {
 
   const isInputActive = (inputType) => handleInputState(inputs[inputType], dt);
 
-  if (isInputActive('moveLeft')) {
+  if (isInputActive("moveLeft")) {
     moveCurrentPiece(grid, currentPiece, -1, 0);
   }
 
-  if (isInputActive('moveRight')) {
+  if (isInputActive("moveRight")) {
     moveCurrentPiece(grid, currentPiece, 1, 0);
   }
 
-  if (isInputActive('rotate')) {
+  if (isInputActive("rotate")) {
     rotateCurrentPiece(grid, currentPiece);
   }
 
-  if (isInputActive('moveDown')) {
+  if (isInputActive("moveDown")) {
     moveCurrentPieceDown(state);
   }
 
-  if (isInputActive('hardDrop')) {
+  if (isInputActive("hardDrop")) {
     while (moveCurrentPieceDown(state)) {}
   }
 }
@@ -252,88 +263,6 @@ function update(state, inputs, dt) {
   }
 }
 
-function drawBlock(ctx, color, x, y) {
-  ctx.fillStyle = color;
-  ctx.fillRect(x + 1, y + 1, BLOCK_SIZE - 1, BLOCK_SIZE - 1);
-}
-
-function drawShape(ctx, shape, colorId, x, y) {
-  const color = SHAPE_COLORS[colorId];
-
-  for (let i = 0; i < shape.length; i++) {
-    for (let j = 0; j < shape[0].length; j++) {
-      if (shape[i][j]) {
-        drawBlock(ctx, color, x + j * BLOCK_SIZE, y + i * BLOCK_SIZE);
-      }
-    }
-  }
-}
-
-function render(ctx, state) {
-  const { grid, currentPiece, nextShapeId } = state;
-
-  ctx.fillStyle = BLOCK_BACKGROUND;
-  ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-
-  for (let i = 0; i < grid.length; i++) {
-    for (let j = 0; j < grid[0].length; j++) {
-      const shapeId = grid[i][j];
-
-      const color =
-        shapeId === BLOCK_EMPTY ? COLOR_EMPTY_BLOCK : SHAPE_COLORS[shapeId];
-
-      drawBlock(ctx, color, j * BLOCK_SIZE, i * BLOCK_SIZE);
-    }
-  }
-
-  drawShape(
-    ctx,
-    currentPiece.shape,
-    currentPiece.shapeId,
-    currentPiece.position.x * BLOCK_SIZE,
-    currentPiece.position.y * BLOCK_SIZE
-  );
-
-  drawShape(
-    ctx,
-    SHAPES[nextShapeId],
-    nextShapeId,
-    SIDEBAR_CONTENT_X,
-    BLOCK_SIZE
-  );
-
-  ctx.fillStyle = COLOR_SIDEBAR_BORDER;
-  ctx.fillRect(GRID_WIDTH, 0, SIDEBAR_BORDER, CANVAS_HEIGHT);
-
-  ctx.font = 'bold 32px monospace';
-  ctx.fillStyle = COLOR_FONT;
-  ctx.textAlign = 'left';
-  ctx.textBaseline = 'top';
-
-  const score = `${state.score}`.padStart(7, '0');
-  ctx.fillText('Score:', SIDEBAR_CONTENT_X, SIDEBAR_CONTENT_Y + BLOCK_SIZE * 5);
-  ctx.fillText(score, SIDEBAR_CONTENT_X, SIDEBAR_CONTENT_Y + BLOCK_SIZE * 6);
-
-  if (state.isGameOver) {
-    ctx.fillStyle = COLOR_GAME_OVER_OVERLAY;
-    ctx.fillRect(0, 0, GRID_WIDTH, CANVAS_HEIGHT);
-
-    ctx.fillStyle = COLOR_FONT;
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.fillText('Game over!', GRID_WIDTH / 2, CANVAS_HEIGHT / 2);
-  }
-}
-
-function initCanvas() {
-  const canvas = document.getElementById('game');
-  canvas.width = CANVAS_WIDTH;
-  canvas.height = CANVAS_HEIGHT;
-  canvas.style.visibility = 'visible';
-
-  return canvas.getContext('2d');
-}
-
 function startCollectingInputs(inputs) {
   function handleKeyEvent(event, inputValue) {
     if (event.repeat) {
@@ -346,14 +275,15 @@ function startCollectingInputs(inputs) {
     }
   }
 
-  window.addEventListener('keydown', (e) =>
-    handleKeyEvent(e, { state: INPUT_STATE_INITIAL, timer: 0 })
+  window.addEventListener("keydown", (e) =>
+    handleKeyEvent(e, { state: INPUT_STATE_INITIAL, timer: 0 }),
   );
-  window.addEventListener('keyup', (e) => handleKeyEvent(e, undefined));
+  window.addEventListener("keyup", (e) => handleKeyEvent(e, undefined));
 }
 
 function main() {
-  const ctx = initCanvas();
+  // Instancia o novo renderizador passando o ID do elemento canvas
+  const renderer = new Renderer("game");
   const state = getInitialState();
   const inputs = {};
 
@@ -366,7 +296,7 @@ function main() {
     previousTime = currentTime;
 
     update(state, inputs, dt);
-    render(ctx, state);
+    renderer.render(state); // Agora chamamos o método da nossa classe
 
     requestAnimationFrame(loop);
   }
