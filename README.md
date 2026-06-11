@@ -33,10 +33,10 @@ python -m http.server 8000
 Then, navigate to http://localhost:8000 in your web browser.
   Option 3: Using Node.js (http-server)
 
-``bash
+```bash
 npx http-server
+```
 
-``
 ## Controls
 * Left / Right Arrow: Move the piece.
 * Up Arrow: Rotate the piece clockwise.
